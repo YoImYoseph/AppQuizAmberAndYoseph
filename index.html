@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,36 +11,42 @@
     type="text/css" />
   <link href="app.css" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
-  <header>
-    <h1>Music Pop Quizz</h1>
-  </header>
-  <main>
-    <form>
-      <fieldset>
-          <legend class="question">Main questions</legend>
-              <div class="radio-item">
-                  <input type="radio" name="answers" id="answer0" value="0">
-                  <label for="answer0"><span>Choice One</span></label>
-              </div>
-              <div class="radio-item">
-                  <input type="radio" name="answers" id="answer1"  value="1">
-                  <label for="answer1"><span>Choice Two</span></label>
-              </div>
-              <div class="radio-item">
-                  <input type="radio" name="answers" id="answer2" value="2">
-                  <label for="answer2"><span>Choice Three</span></label>
-              </div>
-              <div class="radio-item">
-                  <input type="radio" name="answers" id="answer3" value="3">
-                  <label for="answer3"><span>Choice Four</span></label>
-      </fieldset>
-      <button>Start</button>
-      <button>Restart</button>
-  </main>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.js" crossorigin="anonymous"></script>
-  <script src="app.js"></script>
+<header>
+	<h1>Music Quizz App</h1>
+</header>
+<main>
+	<span id="count"></span>
+	<form>
+		<fieldset>
+			<legend id="question">questions go here</legend>
+			<div id="intro"></div>
+			<div id="result">
+				<p></p>
+			</div>
+			<div id="end-results"></div>
+				<div class="radio-item">
+					<input type="radio" name="answers" id="answer-0" value="0">
+					<label for="answer-0"><span>Choice One</span></label>
+				</div>
+				<div class="radio-item">
+					<input type="radio" name="answers" id="answer-1"  value="1">
+					<label for="answer-1"><span>Choice Two</span></label>
+				</div>
+				<div class="radio-item">
+					<input type="radio" name="answers" id="answer-2" value="2">
+					<label for="answer-2"><span>Choice Three</span></label>
+				</div>
+				<div class="radio-item">
+					<input type="radio" name="answers" id="answer-3" value="3">
+					<label for="answer-3"><span>Choice Four</span></label>
+				</div>
+		</fieldset>
+		<button id="button-submit" class="button" type="submit">Enter</button>
+		<button id="button-continue" class="button" type="button">Next</button>
+	</form>
+</main>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="app.js"></script>
 </body>
-
 </html>

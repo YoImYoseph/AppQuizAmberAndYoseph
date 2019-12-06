@@ -7,34 +7,104 @@
   *
 */
 
-html {
-  background-image: url('https://wallpaperplay.com/walls/full/c/e/c/80976.jpg');
-  }
-  
+.no-fouc {display: none;}
+
+html { 
+	background-image: url(https://wallpaperplay.com/walls/full/c/e/c/80976.jpg#.Xeq6GM1cWJE.link);
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
 body {
-  font-family: 'Comic Sans MS', Comic Sans, cursive;
-  font-size: 20px;
-  letter-spacing: 0.05em;
-  color: #D5C2EE;
-  box-sizing: border-box;
-  padding:0;
-  margin: 0.5rem;
+	font-family: 'Comic Sans MS', Comic Sans, cursive;
+	font-size: 25px;
+	letter-spacing: 0.05em;
+	color: rgb(255, 190, 190);
+	box-sizing: border-box;
+	padding:0;
+	margin: 0.5rem;
+	text-align: center;
+}
+
+h1{
+	padding:0; 
+	margin:1rem auto;
+	font-weight: normal;
+}
+
+#count{
+	font-weight: lighter;
+}
+
+form {
+	max-width: 960px;
+	margin: auto;
+}
+
+fieldset{
+	min-height: 60vh;
+	text-align: center;
+	margin: 1em auto;
+	border: 10px solid rgb(66, 148, 255);
+}
+
+#question {
+	color: rgb(66, 148, 255);
+  font-weight: bold;
+  font-size: 2.2rem;
+}
+
+.radio-item {
+	padding: 1rem 0em;
   text-align: center;
 }
-  
-h1{
-  padding:0; 
-  margin:1rem auto;
+
+.radio-item label:hover, .radio-item label:focus{
+	color: rgb(255, 68, 68);
 }
-  
-form {
-  max-width: 960px;
-  margin: auto;
+
+.radio-item input:checked + label {
+	color: rgb(255, 68, 68);
+	font-weight: bold;
 }
-  
-fieldset{
-  min-height: 60vh;
-  text-align: left;
-  margin: 1em auto;
-  border: 1px solid #D5C2EE;
+
+.results-p{
+	padding: 1rem 0rem;
+	margin: 1rem 0rem;
+}
+
+.button{
+	font-family: 'Impact', fantasy;
+	font-size: 1rem;
+	font-weight: bold;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	padding: 0.5rem;
+	margin: 0rem;
+	border:0;
+	color:rgb(66, 148, 255);
+	background-color: rgb(206, 227, 255);
+}
+
+.button:hover, #button-submit:focus {
+		background-color:rgb(255, 255, 255);
+}
+
+#result {
+	font-size: 1.5em;
+	font-weight: bold;
+	text-align: center;
+	padding: 1em;
+	margin: 0;
+}
+
+.correct {color: #87D37C}
+.incorrect {color: rgb(255, 96, 96)}
+
+@media (max-width: 500px){
+	h1{font-size: 1.5em;margin:0.50rem;}
+	#count{font-size: 0.75em;}
+	fieldset{margin:0.10rem;}
 }
