@@ -46,7 +46,7 @@ const STORE = {
 					correctAnswer: 2,
 					r: null
 				},{
-					problem: 'Well, you made it to the end. See your results below:',
+					problem: 'Great work son! Now, Let see how many you got here:',
 					choices: [],
 					yourPick: null,
 					correctAnswer: null
@@ -143,15 +143,15 @@ function storeUserAnswer(answer){
 function checkUserAnswer(userAnswer){
   if(userAnswer == STORE.questions[STORE.questioning].correctAnswer){
 		STORE.questions[STORE.questioning].r = 'Correct';
-		console.log('CORRECT ANSWER!');
+		console.log('YAY!');
 		$('#result').removeClass('incorrect').addClass('correct');
-		displayResult('CORRECT ANSWER!')
+		displayResult('YAY!')
 	}
 	else {
 		STORE.questions[STORE.questioning].r = 'Incorrect';
-		console.log('WRONG ANSWER!');
+		console.log('OOPS!');
 		$('#result').removeClass('correct').addClass('incorrect');
-		displayResult('WRONG ANSWER!')
+		displayResult('OOPS!')
 	}
 }
 
