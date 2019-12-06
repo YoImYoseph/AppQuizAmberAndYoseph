@@ -140,49 +140,49 @@ function storeUserAnswer(answer){
 	STORE.questions[STORE.questioning].yourPick = answer;
 }	
 
-function checkUserAnswer(userAnswer){
-  if(userAnswer == STORE.questions[STORE.questioning].correctAnswer){
-		STORE.questions[STORE.questioning].r = 'Correct';
-		console.log('YAY!');
-		$('#result').removeClass('incorrect').addClass('correct');
-		displayResult('YAY!')
-	}
-	else {
-		STORE.questions[STORE.questioning].r = 'Incorrect';
-		console.log('OOPS!');
-		$('#result').removeClass('correct').addClass('incorrect');
-		displayResult('OOPS!')
-	}
-}
+// function checkUserAnswer(userAnswer){
+//   if(userAnswer == STORE.questions[STORE.questioning].correctAnswer){
+// 		STORE.questions[STORE.questioning].r = 'Correct';
+// 		console.log('YAY!');
+// 		$('#result').removeClass('incorrect').addClass('correct');
+// 		displayResult('YAY!')
+// 	}
+// 	else {
+// 		STORE.questions[STORE.questioning].r = 'Incorrect';
+// 		console.log('OOPS!');
+// 		$('#result').removeClass('correct').addClass('incorrect');
+// 		displayResult('OOPS!')
+// 	}
+// }
 
-function displayResult(result){
-	$('.radio-item').hide();
-	$('#button-submit').hide();
-	$('#result').fadeIn();
-	$('#result > p').text(result);
-	$('#button-continue').show().unbind('click').click(function(e){
-		e.preventDefault();
-		console.log('questioning +1')
-		renderQA(STORE.questioning += 1);
+// function displayResult(result){
+// 	$('.radio-item').hide();
+// 	$('#button-submit').hide();
+// 	$('#result').fadeIn();
+// 	$('#result > p').text(result);
+// 	$('#button-continue').show().unbind('click').click(function(e){
+// 		e.preventDefault();
+// 		console.log('questioning +1')
+// 		renderQA(STORE.questioning += 1);
 
-	});
-}
+// 	});
+// }
 
-function getResults(){
-	var resultsArray=[];
-	for(i = 1 ; i < STORE.questions.length-1; i++){
-		var question = STORE.questions[i].problem;
-		var answerNum = STORE.questions[i].yourPick;
-		var answerStr = STORE.questions[i].choices[answerNum];
-		resultsArray.push( {problem:question, choices:answerStr} );
-	}
-	return STORE.questions[7].choices = resultsArray;
-}
+// function getResults(){
+// 	var resultsArray=[];
+// 	for(i = 1 ; i < STORE.questions.length-1; i++){
+// 		var question = STORE.questions[i].problem;
+// 		var answerNum = STORE.questions[i].yourPick;
+// 		var answerStr = STORE.questions[i].choices[answerNum];
+// 		resultsArray.push( {problem:question, choices:answerStr} );
+// 	}
+// 	return STORE.questions[7].choices = resultsArray;
+// }
 
 $(function(){
-	renderQA();
-	startListeners($('form'));
-	$('.no-fouc').removeClass('no-fouc');
+	// renderQA();
+	// startListeners($('form'));
+	// $('.no-fouc').removeClass('no-fouc');
 });
 /**
  *
