@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Quiz App</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet"
+    type="text/css" />
+  <link href="app.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <header>
+    <h1>Music Pop Quizz</h1>
+  </header>
+  <main>
+    <form>
+      <fieldset>
+          <legend class="question">Main questions</legend>
+              <div class="radio-item">
+                  <input type="radio" name="answers" id="answer0" value="0">
+                  <label for="answer0"><span>Choice One</span></label>
+              </div>
+              <div class="radio-item">
+                  <input type="radio" name="answers" id="answer1"  value="1">
+                  <label for="answer1"><span>Choice Two</span></label>
+              </div>
+              <div class="radio-item">
+                  <input type="radio" name="answers" id="answer2" value="2">
+                  <label for="answer2"><span>Choice Three</span></label>
+              </div>
+              <div class="radio-item">
+                  <input type="radio" name="answers" id="answer3" value="3">
+                  <label for="answer3"><span>Choice Four</span></label>
+      </fieldset>
+      <button>Start</button>
+      <button>Restart</button>
+  </main>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.js" crossorigin="anonymous"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

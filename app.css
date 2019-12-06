@@ -1,0 +1,40 @@
+/* Your styles should be mobile-first and responsive */
+
+/** 
+  * If you are unclear on how to utilize a mobile-first, responsive technique to write your CSS, here is an example: 
+  *
+  * https://github.com/andreacardybailey/responsive_example/blob/master/styles/responsive-base.css 
+  *
+*/
+
+html {
+  background-image: url('https://wallpaperplay.com/walls/full/c/e/c/80976.jpg');
+  }
+  
+body {
+  font-family: 'Comic Sans MS', Comic Sans, cursive;
+  font-size: 20px;
+  letter-spacing: 0.05em;
+  color: #D5C2EE;
+  box-sizing: border-box;
+  padding:0;
+  margin: 0.5rem;
+  text-align: center;
+}
+  
+h1{
+  padding:0; 
+  margin:1rem auto;
+}
+  
+form {
+  max-width: 960px;
+  margin: auto;
+}
+  
+fieldset{
+  min-height: 60vh;
+  text-align: left;
+  margin: 1em auto;
+  border: 1px solid #D5C2EE;
+}
