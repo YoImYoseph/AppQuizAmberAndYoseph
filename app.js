@@ -1,197 +1,177 @@
-document.documentElement.className = 'no-fouc';
-
-const STORE = {
-	questioning: 0,
-	yourAnswer: null,
-	questions: [{
-					problem: 'Hi! Welcome to our Music quiz. Lets start this if you are ready.',
-					choices: ['Choose your answer carefully', 'You can use Google at anytime.', 'This will be not graded and have a fun!'],
-					yourPick: null,
-					correctAnswer: null,
-					r: null
-				},{
-					problem:'Billie Eilish been writing music since she was ___.',
-					choices: [5, 9, 11, 16],
-					yourPick: null,
-					correctAnswer: 2,
-					r: null
-				},{
-					problem: '___ started rapping under the name “JayOhVee”, but eventually changed it to ___.',
-					choices: ['Lil Uzi', '21 Savage', '6IX9INE', 'Joey Bada$$'],
-					yourPick: null,
-					correctAnswer: 3,
-					r: null
-				},{
-					qproblem: 'Lil Yachty used to work at ___.',
-					choices: ['Bdubs', 'Red Lobster', 'Taco Bell', 'McDonald’s'],
-					yourPick: null,
-					correctAnswer: 3,
-					r: null
-				},{
-					problem: 'What year did A Tribe Called Quest release their last studio album?',
-					choices: [1991, 1993, 1998, 2016],
-					yourPick: null,
-					correctAnswer: 3,
-					r: null
-				},{
-					problem: 'How many albums did Prince release before his death?',
-					choices: [5, 39, 76, 102],
-					yourPick: null,
-					correctAnswer: 1,
-					r: null
-				},{
-					problem: 'What is the genre of music that combines reggae and punk rock?',
-					choices: ['Afro-Punk', 'Metal', 'Ska', 'Grindcore'],
-					yourPick: null,
-					correctAnswer: 2,
-					r: null
-				},{
-					problem: 'Great work son! Now, Let see how many you got here:',
-					choices: [],
-					yourPick: null,
-					correctAnswer: null
-				}]
-	};
-
-function renderQA(){
-	var questioning = STORE.questioning;
-	$('#count').text('Question '+questioning+' of '+(STORE.questions.length-2));
-	$('#question').text(STORE.questions[questioning].problem);
-	$('#result').hide();
-	initSelection();
-
-	if(questioning == 0){
-		$('#count').css('visibility', 'hidden');
-		STORE.questions[questioning].choices.forEach(function(answer, index){
-			var introHTML = `<p>${answer}</p>`;
-			$('#intro').append(introHTML);
-		});
-		$('.radio-item').hide();
-		$('#button-submit').show().text('START!');
-		$('#button-continue').hide();
-	}
-	else if(questioning == 7){
-		$('#count').css('visibility', 'hidden');
-		getResults();
-		for (i = 1; i < STORE.questions.length-1; i++){
-				var results = {
-					n: i,
-					problem: STORE.questions[i].problem,
-					correctAnswer: STORE.questions[i].choices[STORE.questions[i].correctAnswer],
-					yourPick: STORE.questions[i].choices[STORE.questions[i].yourPick],
-					r: STORE.questions[i].r
-				}
-			var resultsHTML = `<p class="results-p"><span class="results-number">${results.n}.</span> <span class="results-question">${results.problem}</span><br>Correct Answer: <span class="results-correct">${results.correctAnswer}</span><br>Your Answer: <span class="results-user">${results.yourPick}</span><br>Result: <span class="results-result">${results.r}</span></p>`;
-			$('.radio-item').hide();
-			$('#end-results').hide();
-			$('#end-results').append(resultsHTML);
-			$('#end-results').fadeIn();
-			$('#button-submit').show().text('Restart');
-			$('#button-continue').hide();
-		};
-	}
-	else{
-		$('#count').css('visibility', 'visible');
-		$('#intro').hide();
-		$('.radio-item').fadeIn();
-		STORE.questions[questioning].choices.forEach(function(answer, index){
-			$('label[for="answer-'+index+'"]').text(answer);
-		});
-		$('#button-submit').show().text('ENTER');
-		$('#button-continue').hide();
-	}
-	console.log('questioning is: '+questioning);
-} 
-
-function initSelection(){
-	$('input[type=radio]:first').prop('checked', true);
-	getUserAnswer();
+function renderStartMenu() {
+	$("main").html(`
+	<section class="menuScreen padding-top-medium">
+		<h1>Hi! Welcome to our Music quiz. Lets start this if you are ready.</h1>
+		<p>Choose your answer carefully <br>
+		You can use Google at anytime.<br>
+		This will not be graded. Have  fun!		
+		</p>
+		<button type="button" class="startB">Let's Start!</button>
+	</section>
+	`)
 }
 
-function startListeners(form){
-	form.on('change','input[type=radio]', getUserAnswer)
-		.on('submit', handleSubmit);
+function renderQuestion() {
+	let problem = getCurQuestion();
+	
+	$("main").html(`
+	<section class="questionScreen">
+		<form class="questionForm">
+			<fieldset class="radio">
+				<legend>${problem.text}</legend>
+				
+				<label>
+					<input type="radio" value="${problem.choiceOne}" name="answer" required>
+					${problem.choiceOne}
+				</label>
+				<label>
+					<input type="radio" value="${problem.choiceTwo}" name="answer" required>
+					${problem.choiceTwo}
+				</label>
+				<label>
+					<input type="radio" value="${problem.choiceThree}" name="answer" required>
+					${problem.choiceThree}
+				</label>
+				<label>
+					<input type="radio" value="${problem.choiceFour}" name="answer" required>
+					${problem.choiceFour}
+				</label>
+			</fieldset>
+			
+			<button type="submit">Submit</button>
+		</form>
+	</section>
+	`)
 }
 
-function getUserAnswer(event){
-	STORE.yourAnswer = Number($('input:checked').val());
-	return STORE.yourAnswer;
-}
-
-function handleSubmit(event){
-	event.preventDefault();
-
-	if(STORE.questioning == 7 ){
-		console.log('RESTART');
-		window.location.href='';
+function renderAnswer(answer, correctAnswer, explanation) {
+	
+	// CORRECT ANSWER!
+	if(answer == correctAnswer) {
+		$("main").html(`
+		<section class="answerRightScreen">
+			<h1 class="padding-bottom-small">YAY!</h1>
+			<div class="bold">Your answer is:</div>
+			<div>${correctAnswer}</div>
+			<div>${explanation}</div>
+			<br>
+			<button type="button" class="nextQuestion">Next</button>
+		</section>
+		`)
 	}
-	else if(STORE.questioning == 0){
-		console.log('BEGIN');
-		renderQA(STORE.questioning += 1);
-	}
-	else{
-		console.log('SUBMIT');
-		storeUserAnswer(getUserAnswer());
-		checkUserAnswer(getUserAnswer());
+
+	else {
+		$("main").html(`
+		<section class="answerRightScreen">
+			<h1 class="padding-bottom-small">OOPS!</h1>
+			<div class="bold">Your answer was:</div>
+			<div>${answer}</div>
+			<br>
+			<div class="bold">The correct answer is:</div>
+			<div>${correctAnswer}</div>
+			<div>${explanation}</div>
+			<br>
+			<button type="button" class="nextQuestion">Next</button>
+		</section>
+		`)
 	}
 }
 
-function storeUserAnswer(answer){
-	STORE.questions[STORE.questioning].yourPick = answer;
-}	
+function renderFeedback() {
+	let won = getScore() == getTotalNumQuestions();
+	$("main").html(`
+	<section class="feedbackScreen">
+		<h1 class="padding-bottom-small">${won ? "Hooray! You made it!" : "Uh-Oh... It is okay. You can try again."}</h1>
+		<br><br>
+		<div><span class="bold">Final Score</span>: <span class="score">${getScore()}</span>/${getTotalNumQuestions()}</div>
+		<br>
+		<br>
+		<button type="button" class="startB">Play Again</button>
+	</section>
+	`)
+}
 
-// function checkUserAnswer(userAnswer){
-//   if(userAnswer == STORE.questions[STORE.questioning].correctAnswer){
-// 		STORE.questions[STORE.questioning].r = 'Correct';
-// 		console.log('YAY!');
-// 		$('#result').removeClass('incorrect').addClass('correct');
-// 		displayResult('YAY!')
-// 	}
-// 	else {
-// 		STORE.questions[STORE.questioning].r = 'Incorrect';
-// 		console.log('OOPS!');
-// 		$('#result').removeClass('correct').addClass('incorrect');
-// 		displayResult('OOPS!')
-// 	}
-// }
+function updateScore() {
+	$(".score").html(curScore);
+	
+	let questionNum = curQuestion+1;
+	questionNum = Math.min(questionNum, getTotalNumQuestions());
+	$(".questionNumber").html(questionNum);
+}
 
-// function displayResult(result){
-// 	$('.radio-item').hide();
-// 	$('#button-submit').hide();
-// 	$('#result').fadeIn();
-// 	$('#result > p').text(result);
-// 	$('#button-continue').show().unbind('click').click(function(e){
-// 		e.preventDefault();
-// 		console.log('questioning +1')
-// 		renderQA(STORE.questioning += 1);
+function handleStartQuiz() {
+	$("main").on("click", ".startB", function(e) {
+		curScore = 0;
+		curQuestion = 0;
+		updateScore();
+		renderQuestion();
+	});
+}
 
-// 	});
-// }
+function handleAnswerSubmit() {
+	$("main").on("submit", "form", function(e) {
+		e.preventDefault();
+		
+		let answer = $("input[name='answer']:checked", ".questionForm").val();
+		let isCorrect = checkAnswer(answer, curQuestion);
+		if(isCorrect) {
+			curScore++;
+			updateScore();
+		}
+		
+		renderAnswer(answer, getCorrectAnswer(curQuestion), getExplanation(curQuestion));
+	});
+}
 
-// function getResults(){
-// 	var resultsArray=[];
-// 	for(i = 1 ; i < STORE.questions.length-1; i++){
-// 		var question = STORE.questions[i].problem;
-// 		var answerNum = STORE.questions[i].yourPick;
-// 		var answerStr = STORE.questions[i].choices[answerNum];
-// 		resultsArray.push( {problem:question, choices:answerStr} );
-// 	}
-// 	return STORE.questions[7].choices = resultsArray;
-// }
+function handleNextQuestion() {
+	$("main").on("click", ".nextQuestion", function(e) {
+		curQuestion++;
+		updateScore();
+		
+		if(curQuestion >= questionSet.length) {
+			renderFeedback();
+		}
+		else {
+			renderQuestion();
+		}
+	});
+}
 
-$(function(){
-	// renderQA();
-	// startListeners($('form'));
-	// $('.no-fouc').removeClass('no-fouc');
-});
-/**
- *
- * Your app should include a render() function, that regenerates
- * the view each time the store is updated. See your course
- * material, consult your instructor, and reference the slides
- * for more details.
- *
- * NO additional HTML elements should be added to the index.html file.
- *
- * You may add attributes (classes, ids, etc) to the existing HTML elements, or link stylesheets or additional scripts if necessary
- */
+function handleSetup() {
+	$(function(){
+		handleStartQuiz();
+		handleAnswerSubmit();
+		handleNextQuestion();
+		
+		updateScore();
+		
+		renderStartMenu();
+	});
+}
+handleSetup();
+
+function checkAnswer(answer, questionNumber) {
+	let question = questionSet[questionNumber];
+	let correctAnswer = getCorrectAnswer(questionNumber);
+	return correctAnswer == answer;
+}
+
+function getCorrectAnswer(questionNumber) {
+	return ANSWERS[questionNumber];
+}
+
+function getExplanation(questionNumber) {
+	return EXPLANATIONS[questionNumber];
+}
+
+function getCurQuestion() {
+	return questionSet[curQuestion];
+}
+
+function getScore() {
+	return curScore;
+}
+
+function getTotalNumQuestions() {
+	return questionSet.length;
+}
